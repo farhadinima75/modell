@@ -254,7 +254,6 @@ def inception_resnet_v2(inputs, num_classes=1001, is_training=True,
                         create_aux_logits=True,
                         activation_fn=tf.nn.relu):
   """Creates the Inception Resnet V2 model.
-
   Args:
     inputs: a 4-D tensor of size [batch_size, height, width, 3].
       Dimension batch_size may be undefined. If create_aux_logits is false,
@@ -269,7 +268,6 @@ def inception_resnet_v2(inputs, num_classes=1001, is_training=True,
     scope: Optional variable_scope.
     create_aux_logits: Whether to include the auxilliary logits.
     activation_fn: Activation function for conv2d.
-
   Returns:
     net: the output of the logits layer (if num_classes is a non-zero integer),
       or the non-dropped-out input to the logits layer (if num_classes is 0 or
@@ -292,8 +290,8 @@ def inception_resnet_v2(inputs, num_classes=1001, is_training=True,
           #aux = slim.avg_pool2d(aux, 5, stride=3, padding='VALID',
           #                      scope='Conv2d_1a_3x3')
           aux = slim.conv2d(aux, 128, 1, scope='Conv2d_1b_1x1')
-          aux = slim.conv2d(aux, 768, aux.get_shape()[1:3],
-                            padding='VALID', scope='Conv2d_2a_5x5')
+        #  aux = slim.conv2d(aux, 768, aux.get_shape()[1:3],
+         #                   padding='VALID', scope='Conv2d_2a_5x5')
           aux = slim.flatten(aux)
           aux = slim.fully_connected(aux, num_classes, activation_fn=None,
                                      scope='Logits')
@@ -333,7 +331,6 @@ def inception_resnet_v2_arg_scope(
     batch_norm_updates_collections=tf.GraphKeys.UPDATE_OPS,
     batch_norm_scale=False):
   """Returns the scope with the default parameters for inception_resnet_v2.
-
   Args:
     weight_decay: the weight decay for weights variables.
     batch_norm_decay: decay for the moving average of batch_norm momentums.
@@ -343,7 +340,6 @@ def inception_resnet_v2_arg_scope(
       batch norm.
     batch_norm_scale: If True, uses an explicit `gamma` multiplier to scale the
       activations in the batch normalization layer.
-
   Returns:
     a arg_scope with the parameters needed for inception_resnet_v2.
   """
